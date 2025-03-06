@@ -14,8 +14,51 @@ function PhScaleSimulator() {
 
   const experiment = {
     title: "pH Scale Simulator",
-    theory:
-      "The pH scale measures how acidic or basic a substance is, ranging from 0 to 14...",
+    theory:(
+    <>
+    <h2 className="text-xl font-bold mt-4">Aim</h2>
+    <p>
+      To study the pH scale and understand the classification of substances as acidic, neutral, or basic based on their pH values.
+    </p>
+  
+    <h2 className="text-xl font-bold mt-4">Theory</h2>
+    <p>
+      The pH scale is a logarithmic scale used to measure the acidity or basicity of a solution. It ranges from **0 to 14**, where **7 is neutral**, values **below 7 indicate acidity**, and values **above 7 indicate basicity**.
+    </p>
+    <p>
+      The pH of a solution depends on the concentration of **hydrogen ions (H⁺)** present in it. Strong acids have a low pH (closer to 0), while strong bases have a high pH (closer to 14).
+    </p>
+    <p>
+      - **Acidic Solutions (pH less than 7):** High concentration of H⁺ ions (e.g., lemon juice, vinegar).  
+    </p>
+    <p>
+      - **Neutral Solutions (pH = 7):** Equal concentration of H⁺ and OH⁻ ions (e.g., pure water).  
+    </p>
+    <p>
+      - **Basic Solutions (pH greater than 7):** High concentration of OH⁻ ions (e.g., soap, ammonia).  
+    </p>
+  
+    <h2 className="text-xl font-bold mt-4">Mathematical Model</h2>
+    <p>
+      The pH of a solution is calculated using the formula:
+    </p>
+    <p className="text-center font-mono bg-gray-100 p-2 rounded-md">
+      pH = -log[H⁺]
+    </p>
+    <p>
+      - **pH:** A measure of acidity or basicity. <br />
+      - **[H⁺]:** The concentration of hydrogen ions in moles per liter (M).  
+    </p>
+  
+    <h2 className="text-xl font-bold mt-4">Applications</h2>
+    <p>
+      - Monitoring water quality in lakes, rivers, and drinking water. <br />
+      - Testing soil pH for agriculture and plant growth. <br />
+      - Determining the acidity of food and beverages. <br />
+      - Maintaining the pH balance in medical and pharmaceutical applications.  
+    </p>
+  </>
+),  
     procedure: [
       "Access the pH simulator*: Open the virtual pH simulation software or website and ensure it is functioning correctly.",
       "Familiarize with the interface*: Explore the simulator’s tools, such as the pH scale, solution selection, dropper, beakers, and virtual probes.",
