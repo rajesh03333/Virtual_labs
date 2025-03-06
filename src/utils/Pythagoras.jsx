@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
 import Pythagoras from "./help_pythagoras";
+import ChatInterface from "./ChatAi";
 
 function PythagorasTheorem() {
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ function PythagorasTheorem() {
       "Analyze sources of error*: Consider limitations of the simulation, such as rounding errors, digital approximations, and the lack of real-world constraints.",
       "Document findings*: Compile observations, side measurements, calculations, and conclusions based on the simulator’s output.",
     ],
-    animation: "/assets/pythagoras-animation.gif",
+    queries: "/assets/pythagoras-animation.gif",
     video: "https://www.youtube.com/embed/PythagorasVideo",
     resources: [
       {
@@ -182,7 +183,7 @@ function PythagorasTheorem() {
         {[
           "theory",
           "procedure",
-          "animation",
+          "queries",
           "simulation",
           "video",
           "resources",
@@ -342,12 +343,10 @@ function PythagorasTheorem() {
           </div>
         )}
 
-        {activeTab === "animation" && (
-          <img
-            src={experiment.animation}
-            alt="Animation"
-            className="rounded-md w-full"
-          />
+        {activeTab === "queries" && (
+          <div>
+            <ChatInterface experiment="ph scale simulator" />
+          </div>
         )}
 
         {activeTab === "simulation" && <Pythagoras />}

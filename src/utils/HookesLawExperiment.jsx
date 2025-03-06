@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
 import HelpHookesLaw from "./help_HookesLawExperiment";
+import ChatInterface from "./ChatAi";
 
 function HookesLawExperiment() {
   const navigate = useNavigate();
@@ -89,7 +90,7 @@ function HookesLawExperiment() {
 
       "Document your findings*: Prepare a lab report with detailed observations, data tables, calculations, graphs, and conclusions on the validity of Hooke’s Law for different materials.",
     ],
-    animation: "/assets/hookes-law-animation.gif",
+    queries: "/assets/hookes-law-animation.gif",
     video: "https://www.youtube.com/embed/HookesLawVideo",
     resources: [
       {
@@ -219,7 +220,7 @@ function HookesLawExperiment() {
         {[
           "theory",
           "procedure",
-          "animation",
+          "queries",
           "simulation",
           "video",
           "resources",
@@ -376,12 +377,10 @@ function HookesLawExperiment() {
             </div>
           </div>
         )}
-        {activeTab === "animation" && (
-          <img
-            src={experiment.animation}
-            alt="Hooke's Law Animation"
-            className="rounded-md w-full"
-          />
+        {activeTab === "queries" && (
+          <div>
+            <ChatInterface experiment="hooks law"/>
+            </div>
         )}
         {activeTab === "simulation" && <HelpHookesLaw />}
 

@@ -3,195 +3,239 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
 import HelpSPE from "./help_SimplePendulum"; // Simulation Component
+import ChatInterface from "./ChatAi";
 
 function SimplePendulumExperiment() {
-    const navigate = useNavigate();
-    const [activeTab, setActiveTab] = useState("theory");
-    const [feedback, setFeedback] = useState("");
-    const [message, setMessage] = useState("");
-    const [quizAnswers, setQuizAnswers] = useState({});
-    const [score, setScore] = useState(null);
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("theory");
+  const [feedback, setFeedback] = useState("");
+  const [message, setMessage] = useState("");
+  const [quizAnswers, setQuizAnswers] = useState({});
+  const [score, setScore] = useState(null);
 
-    const experiment = {
-        title: "Simple Pendulum Simulator",
-        theory:( <>
-            <h2 className="text-xl font-bold mt-4">Aim</h2>
-            <p>
-              To study the motion of a simple pendulum and understand the factors affecting its time period.
-            </p>
-          
-            <h2 className="text-xl font-bold mt-4">Theory</h2>
-            <p>
-              A simple pendulum consists of a small mass (bob) suspended from a fixed point by a string or rod of length L. When displaced and released, it oscillates back and forth under the influence of gravity.
-            </p>
-            <p>
-              The motion of a simple pendulum approximates simple harmonic motion (SHM) for small angles of displacement (θ &lt; 15°). The restoring force responsible for the motion is provided by the component of gravitational force acting tangentially to the path of motion.
-            </p>
-            <p>
-              - **Restoring Force:** The force acting to bring the pendulum back to equilibrium is proportional to its displacement.  
-            </p>
-            <p>
-              - **Time Period Dependence:** The time period of oscillation depends on the length of the string and the acceleration due to gravity.
-            </p>
-          
-            <h2 className="text-xl font-bold mt-4">Mathematical Model</h2>
-            <p>
-              The time period (T) of a simple pendulum is given by the formula:
-            </p>
-            <p className="text-center font-mono bg-gray-100 p-2 rounded-md">
-              T = 2π √(L/g)
-            </p>
-            <p>
-              - **T:** Time period of one complete oscillation (s) <br />
-              - **L:** Length of the pendulum (m) <br />
-              - **g:** Acceleration due to gravity (9.81 m/s²)  
-            </p>
-          
-            <h2 className="text-xl font-bold mt-4">Applications</h2>
-            <p>
-              - Timekeeping in pendulum clocks <br />
-              - Measurement of gravitational acceleration <br />
-              - Seismometers for detecting earthquakes <br />
-              - Demonstration of Earth's rotation using Foucault’s pendulum  
-            </p>
-          </>
-          
-      ),      
-      procedure: [
-        "Set up the pendulum apparatus*: Secure a rigid support to suspend the pendulum. Ensure the support is stable and the string or rod is firmly attached.",
+  const experiment = {
+    title: "Simple Pendulum Simulator",
+    theory: (
+      <>
+        <h2 className="text-xl font-bold mt-4">Aim</h2>
+        <p>
+          To study the motion of a simple pendulum and understand the factors
+          affecting its time period.
+        </p>
 
-        "Measure the length of the pendulum*: Using a meter scale, carefully measure the distance from the point of suspension to the center of the bob. Record this value as L (in meters).",
+        <h2 className="text-xl font-bold mt-4">Theory</h2>
+        <p>
+          A simple pendulum consists of a small mass (bob) suspended from a
+          fixed point by a string or rod of length L. When displaced and
+          released, it oscillates back and forth under the influence of gravity.
+        </p>
+        <p>
+          The motion of a simple pendulum approximates simple harmonic motion
+          (SHM) for small angles of displacement (θ &lt; 15°). The restoring
+          force responsible for the motion is provided by the component of
+          gravitational force acting tangentially to the path of motion.
+        </p>
+        <p>
+          - **Restoring Force:** The force acting to bring the pendulum back to
+          equilibrium is proportional to its displacement.
+        </p>
+        <p>
+          - **Time Period Dependence:** The time period of oscillation depends
+          on the length of the string and the acceleration due to gravity.
+        </p>
 
-        "Prepare timing equipment*: Have a stopwatch or timer ready with precision to at least 0.01 seconds. Alternatively, use a photogate timer for more accurate measurements.",
+        <h2 className="text-xl font-bold mt-4">Mathematical Model</h2>
+        <p>The time period (T) of a simple pendulum is given by the formula:</p>
+        <p className="text-center font-mono bg-gray-100 p-2 rounded-md">
+          T = 2π √(L/g)
+        </p>
+        <p>
+          - **T:** Time period of one complete oscillation (s) <br />
+          - **L:** Length of the pendulum (m) <br />- **g:** Acceleration due to
+          gravity (9.81 m/s²)
+        </p>
 
-        "Mark the equilibrium position*: Note the position where the pendulum hangs at rest. This is your reference point for counting oscillations.",
+        <h2 className="text-xl font-bold mt-4">Applications</h2>
+        <p>
+          - Timekeeping in pendulum clocks <br />
+          - Measurement of gravitational acceleration <br />
+          - Seismometers for detecting earthquakes <br />- Demonstration of
+          Earth's rotation using Foucault’s pendulum
+        </p>
+      </>
+    ),
+    procedure: [
+      "Set up the pendulum apparatus*: Secure a rigid support to suspend the pendulum. Ensure the support is stable and the string or rod is firmly attached.",
 
-        "Displace the pendulum*: Gently pull the pendulum bob to one side, keeping the string taut. For the simple pendulum approximation to be valid, limit the displacement to small angles (preferably less than 15° from vertical).",
+      "Measure the length of the pendulum*: Using a meter scale, carefully measure the distance from the point of suspension to the center of the bob. Record this value as L (in meters).",
 
-        "Release the pendulum*: Let go of the bob without imparting any additional velocity. The pendulum should swing smoothly in a plane.",
+      "Prepare timing equipment*: Have a stopwatch or timer ready with precision to at least 0.01 seconds. Alternatively, use a photogate timer for more accurate measurements.",
 
-        "Start timing multiple oscillations*: Begin timing as the pendulum passes through the equilibrium position. Counting this as oscillation zero, count at least 20 complete oscillations for better accuracy.",
+      "Mark the equilibrium position*: Note the position where the pendulum hangs at rest. This is your reference point for counting oscillations.",
 
-        "Record the total time*: Stop the timer after the predetermined number of oscillations. Record this value as the total time t (in seconds).",
+      "Displace the pendulum*: Gently pull the pendulum bob to one side, keeping the string taut. For the simple pendulum approximation to be valid, limit the displacement to small angles (preferably less than 15° from vertical).",
 
-        "Calculate the experimental period*: Divide the total time by the number of oscillations to find the experimental period: Tₑₓₚ = t/n.",
+      "Release the pendulum*: Let go of the bob without imparting any additional velocity. The pendulum should swing smoothly in a plane.",
 
-        "Calculate the theoretical period*: Using the formula T = 2π √(L/g), calculate the theoretical period where g = 9.81 m/s².",
+      "Start timing multiple oscillations*: Begin timing as the pendulum passes through the equilibrium position. Counting this as oscillation zero, count at least 20 complete oscillations for better accuracy.",
 
-        "Compare experimental and theoretical values*: Calculate the percentage error: % error = |Tₑₓₚ - Tₜₕₑₒᵣᵧ| / Tₜₕₑₒᵣᵧ × 100%.",
+      "Record the total time*: Stop the timer after the predetermined number of oscillations. Record this value as the total time t (in seconds).",
 
-        "Repeat with different lengths*: Change the length of the pendulum and repeat steps 2-11. Create a graph of T² vs L, which should be a straight line with slope 4π²/g.",
+      "Calculate the experimental period*: Divide the total time by the number of oscillations to find the experimental period: Tₑₓₚ = t/n.",
 
-        "Investigate the effect of mass*: Keeping the length constant, replace the bob with different masses and repeat the experiment to verify that mass does not affect the period.",
+      "Calculate the theoretical period*: Using the formula T = 2π √(L/g), calculate the theoretical period where g = 9.81 m/s².",
 
-        "Analyze sources of error*: Consider air resistance, friction at the pivot, measurement uncertainties, and timing errors in your analysis.",
+      "Compare experimental and theoretical values*: Calculate the percentage error: % error = |Tₑₓₚ - Tₜₕₑₒᵣᵧ| / Tₜₕₑₒᵣᵧ × 100%.",
 
-        "Document your findings*: Prepare a comprehensive lab report including your methodology, data tables, calculations, graphs, and conclusions.",
-      ],
-        animation: "/assets/simple-pendulum-animation.gif",
-        video: "https://www.youtube.com/embed/SimplePendulumVideo",
-        resources: [
-            { title: "Simple Pendulum - Khan Academy", link: "https://www.khanacademy.org" },
-            { title: "Simple Pendulum - Wikipedia", link: "https://en.wikipedia.org/wiki/Pendulum" },
+      "Repeat with different lengths*: Change the length of the pendulum and repeat steps 2-11. Create a graph of T² vs L, which should be a straight line with slope 4π²/g.",
+
+      "Investigate the effect of mass*: Keeping the length constant, replace the bob with different masses and repeat the experiment to verify that mass does not affect the period.",
+
+      "Analyze sources of error*: Consider air resistance, friction at the pivot, measurement uncertainties, and timing errors in your analysis.",
+
+      "Document your findings*: Prepare a comprehensive lab report including your methodology, data tables, calculations, graphs, and conclusions.",
+    ],
+    queries: "/assets/simple-pendulum-animation.gif",
+    video: "https://www.youtube.com/embed/SimplePendulumVideo",
+    resources: [
+      {
+        title: "Simple Pendulum - Khan Academy",
+        link: "https://www.khanacademy.org",
+      },
+      {
+        title: "Simple Pendulum - Wikipedia",
+        link: "https://en.wikipedia.org/wiki/Pendulum",
+      },
+    ],
+    feedback: "Please share your feedback on this simulation!",
+    quiz: [
+      {
+        question:
+          "What is the formula for the time period of a simple pendulum?",
+        options: ["T = 2π √(L/g)", "T = L/g", "T = 2πg/L", "T = g/L"],
+        answer: "T = 2π √(L/g)",
+      },
+      {
+        question: "Which factor affects the time period of a simple pendulum?",
+        options: [
+          "Mass of the bob",
+          "Length of the string",
+          "Amplitude",
+          "All of the above",
         ],
-        feedback: "Please share your feedback on this simulation!",
-        quiz: [
-            {
-                question: "What is the formula for the time period of a simple pendulum?",
-                options: ["T = 2π √(L/g)", "T = L/g", "T = 2πg/L", "T = g/L"],
-                answer: "T = 2π √(L/g)",
-            },
-            {
-                question: "Which factor affects the time period of a simple pendulum?",
-                options: ["Mass of the bob", "Length of the string", "Amplitude", "All of the above"],
-                answer: "Length of the string",
-            },
-            {
-                question: "What happens if the length of the pendulum is increased?",
-                options: ["Time period decreases", "Time period remains the same", "Time period increases", "Pendulum stops oscillating"],
-                answer: "Time period increases",
-            },
-            {
-                question: "What is the acceleration due to gravity (g) on Earth?",
-                options: ["8.9 m/s²", "9.81 m/s²", "10.5 m/s²", "12 m/s²"],
-                answer: "9.81 m/s²",
-            },
-            {
-                question: "What kind of motion does a simple pendulum exhibit?",
-                options: ["Linear motion", "Rotational motion", "Oscillatory motion", "Random motion"],
-                answer: "Oscillatory motion",
-            },
+        answer: "Length of the string",
+      },
+      {
+        question: "What happens if the length of the pendulum is increased?",
+        options: [
+          "Time period decreases",
+          "Time period remains the same",
+          "Time period increases",
+          "Pendulum stops oscillating",
         ],
+        answer: "Time period increases",
+      },
+      {
+        question: "What is the acceleration due to gravity (g) on Earth?",
+        options: ["8.9 m/s²", "9.81 m/s²", "10.5 m/s²", "12 m/s²"],
+        answer: "9.81 m/s²",
+      },
+      {
+        question: "What kind of motion does a simple pendulum exhibit?",
+        options: [
+          "Linear motion",
+          "Rotational motion",
+          "Oscillatory motion",
+          "Random motion",
+        ],
+        answer: "Oscillatory motion",
+      },
+    ],
+  };
+
+  const handleOptionChange = (questionIndex, option) => {
+    setQuizAnswers({ ...quizAnswers, [questionIndex]: option });
+  };
+
+  const handleSubmitQuiz = () => {
+    let correctAnswers = 0;
+    experiment.quiz.forEach((q, index) => {
+      if (quizAnswers[index] === q.answer) correctAnswers++;
+    });
+    setScore(correctAnswers);
+  };
+
+  const sendFeedback = (e) => {
+    e.preventDefault();
+    if (!feedback.trim()) {
+      setMessage("Please enter your feedback before submitting.");
+      return;
+    }
+
+    const templateParams = {
+      user_name: "Administrator",
+      user_email: "rajeshgajula.1434@gmail.com",
+      from_name: "Vision Lab Experiment - Simple Pendulum",
+      message: feedback,
     };
 
-    const handleOptionChange = (questionIndex, option) => {
-        setQuizAnswers({ ...quizAnswers, [questionIndex]: option });
-    };
+    emailjs
+      .send(
+        "service_0updalp",
+        "template_gga1aol",
+        templateParams,
+        "eQ_JCPczgpDZ1uk7d"
+      )
+      .then(() => {
+        setMessage("Thank you for your feedback!");
+        setFeedback("");
+      })
+      .catch(() => setMessage("Error sending feedback. Please try again."));
+  };
 
-    const handleSubmitQuiz = () => {
-        let correctAnswers = 0;
-        experiment.quiz.forEach((q, index) => {
-            if (quizAnswers[index] === q.answer) correctAnswers++;
-        });
-        setScore(correctAnswers);
-    };
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <button
+        onClick={() => navigate("/physics")}
+        className="flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-6"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back to Physics
+      </button>
 
-    const sendFeedback = (e) => {
-        e.preventDefault();
-        if (!feedback.trim()) {
-            setMessage("Please enter your feedback before submitting.");
-            return;
-        }
+      <h1 className="text-3xl font-bold text-orange-600 mb-4">
+        {experiment.title}
+      </h1>
 
-        const templateParams = {
-            user_name: "Administrator",
-            user_email: "rajeshgajula.1434@gmail.com",
-            from_name: "Vision Lab Experiment - Simple Pendulum",
-            message: feedback,
-        };
+      <div className="flex gap-4 mb-6 border-b pb-2">
+        {[
+          "theory",
+          "procedure",
+          "queries",
+          "simulation",
+          "video",
+          "resources",
+          "feedback",
+          "quiz",
+        ].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`px-4 py-2 rounded-md ${
+              activeTab === tab ? "bg-orange-300 font-bold" : "bg-gray-200"
+            }`}
+          >
+            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+          </button>
+        ))}
+      </div>
 
-        emailjs
-            .send(
-                "service_0updalp",
-                "template_gga1aol",
-                templateParams,
-                "eQ_JCPczgpDZ1uk7d"
-            )
-            .then(() => {
-                setMessage("Thank you for your feedback!");
-                setFeedback("");
-            })
-            .catch(() => setMessage("Error sending feedback. Please try again."));
-    };
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        {activeTab === "theory" && (
+          <p className="text-gray-700">{experiment.theory}</p>
+        )}
 
-    return (
-        <div className="container mx-auto px-4 py-8">
-            <button
-                onClick={() => navigate("/physics")}
-                className="flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-6"
-            >
-                <ArrowLeft className="w-4 h-4" />
-                Back to Physics
-            </button>
-
-            <h1 className="text-3xl font-bold text-orange-600 mb-4">{experiment.title}</h1>
-
-            <div className="flex gap-4 mb-6 border-b pb-2">
-                {["theory", "procedure", "animation", "simulation", "video", "resources", "feedback", "quiz"].map((tab) => (
-                    <button
-                        key={tab}
-                        onClick={() => setActiveTab(tab)}
-                        className={`px-4 py-2 rounded-md ${activeTab === tab ? "bg-orange-300 font-bold" : "bg-gray-200"}`}
-                    >
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
-                    </button>
-                ))}
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md">
-                {activeTab === "theory" && <p className="text-gray-700">{experiment.theory}</p>}
-
-                {activeTab === "procedure" && (
+        {activeTab === "procedure" && (
           <div className="procedure-section">
             <h2 className="text-2xl font-semibold text-orange-600 mb-4">
               Experimental Procedure
@@ -348,64 +392,97 @@ function SimplePendulumExperiment() {
           </div>
         )}
 
-                {activeTab === "animation" && (
-                    <img src={experiment.animation} alt="Simple Pendulum Animation" className="rounded-md w-full" />
-                )}
+        {activeTab === "queries" && (
+          <div>
+            <ChatInterface experiment="simple pendulum" />
+          </div>
+        )}
 
-                {activeTab === "simulation" && <HelpSPE />}
+        {activeTab === "simulation" && <HelpSPE />}
 
-                {activeTab === "video" && (
-                    <iframe
-                        width="100%"
-                        height="400"
-                        src={experiment.video}
-                        title="Simple Pendulum Video"
-                        className="rounded-md"
-                        allowFullScreen
-                    ></iframe>
-                )}
+        {activeTab === "video" && (
+          <iframe
+            width="100%"
+            height="400"
+            src={experiment.video}
+            title="Simple Pendulum Video"
+            className="rounded-md"
+            allowFullScreen
+          ></iframe>
+        )}
 
-                {activeTab === "resources" && (
-                    <ul className="list-disc pl-5">
-                        {experiment.resources.map((res, i) => (
-                            <li key={i}>
-                                <a href={res.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                                    {res.title}
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                )}
+        {activeTab === "resources" && (
+          <ul className="list-disc pl-5">
+            {experiment.resources.map((res, i) => (
+              <li key={i}>
+                <a
+                  href={res.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
+                  {res.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
 
-                {activeTab === "feedback" && (
-                    <div>
-                        <p className="text-gray-700 mb-4">{experiment.feedback}</p>
-                        <textarea className="w-full border p-3 rounded-md" placeholder="Write your feedback here..." value={feedback} onChange={(e) => setFeedback(e.target.value)}></textarea>
-                        <button onClick={sendFeedback} className="mt-3 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Submit</button>
-                        {message && <p className="mt-4 text-green-600">{message}</p>}
-                    </div>
-                )}
+        {activeTab === "feedback" && (
+          <div>
+            <p className="text-gray-700 mb-4">{experiment.feedback}</p>
+            <textarea
+              className="w-full border p-3 rounded-md"
+              placeholder="Write your feedback here..."
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+            ></textarea>
+            <button
+              onClick={sendFeedback}
+              className="mt-3 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              Submit
+            </button>
+            {message && <p className="mt-4 text-green-600">{message}</p>}
+          </div>
+        )}
 
-                {activeTab === "quiz" && (
-                    <div>
-                        {experiment.quiz.map((q, i) => (
-                            <div key={i} className="mb-4">
-                                <p className="font-semibold">{i + 1}. {q.question}</p>
-                                {q.options.map((option, j) => (
-                                    <label key={j} className="block">
-                                        <input type="radio" name={`question-${i}`} value={option} onChange={() => handleOptionChange(i, option)} />
-                                        {" " + option}
-                                    </label>
-                                ))}
-                            </div>
-                        ))}
-                        <button onClick={handleSubmitQuiz} className="mt-3 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Submit</button>
-                        {score !== null && <p className="mt-4 text-lg font-bold text-green-600">Your Score: {score}/{experiment.quiz.length}</p>}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
+        {activeTab === "quiz" && (
+          <div>
+            {experiment.quiz.map((q, i) => (
+              <div key={i} className="mb-4">
+                <p className="font-semibold">
+                  {i + 1}. {q.question}
+                </p>
+                {q.options.map((option, j) => (
+                  <label key={j} className="block">
+                    <input
+                      type="radio"
+                      name={`question-${i}`}
+                      value={option}
+                      onChange={() => handleOptionChange(i, option)}
+                    />
+                    {" " + option}
+                  </label>
+                ))}
+              </div>
+            ))}
+            <button
+              onClick={handleSubmitQuiz}
+              className="mt-3 px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              Submit
+            </button>
+            {score !== null && (
+              <p className="mt-4 text-lg font-bold text-green-600">
+                Your Score: {score}/{experiment.quiz.length}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default SimplePendulumExperiment;

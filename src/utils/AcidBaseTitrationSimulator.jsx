@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
 import HelpAcidBaseTitration from "./help_acidbasetitration";
+import ChatInterface from "./ChatAi";
 
 function AcidBaseTitrationSimulator() {
   const navigate = useNavigate();
@@ -16,48 +17,61 @@ function AcidBaseTitrationSimulator() {
     title: "Acid-Base Titration Simulator",
     theory: (
       <>
-  <h2 className="text-xl font-bold mt-4">Aim</h2>
-  <p>
-    To understand and apply Pythagoras' Theorem, which defines the relationship between the sides of a right-angled triangle.
-  </p>
+        <h2 className="text-xl font-bold mt-4">Aim</h2>
+        <p>
+          To study acid-base titration and understand how the concentration of
+          an acid or a base is determined using a neutralization reaction.
+        </p>
 
-  <h2 className="text-xl font-bold mt-4">Theory</h2>
-  <p>
-    Pythagoras' Theorem states that in a right-angled triangle, the square of the length of the hypotenuse is equal to the sum of the squares of the lengths of the other two sides.
-  </p>
-  <p>
-    This fundamental theorem in geometry helps in determining the length of a missing side in a right-angled triangle.
-  </p>
-  <p>
-    - **Hypotenuse (c):** The longest side of the right-angled triangle, opposite the right angle.
-  </p>
-  <p>
-    - **Legs (a, b):** The two shorter sides that form the right angle.
-  </p>
-  <p>
-    - **Right Angle (90°):** The angle between the two legs.
-  </p>
+        <h2 className="text-xl font-bold mt-4">Theory</h2>
+        <p>
+          Acid-base titration is a quantitative analytical technique used to
+          determine the concentration of an unknown acid or base solution. It is
+          based on a neutralization reaction between an acid and a base.
+        </p>
+        <p>
+          The process involves adding a titrant (a solution of known
+          concentration) to an analyte (a solution of unknown concentration)
+          until the reaction reaches the equivalence point, where the acid and
+          base completely neutralize each other.
+        </p>
+        <p>
+          - **Acid (H⁺ donor):** A substance that releases hydrogen ions (H⁺) in
+          solution.
+        </p>
+        <p>
+          - **Base (OH⁻ donor):** A substance that releases hydroxide ions (OH⁻)
+          in solution.
+        </p>
+        <p>
+          - **Equivalence Point:** The point where the number of moles of acid
+          equals the number of moles of base.
+        </p>
+        <p>
+          - **Indicator:** A chemical that changes color at or near the
+          equivalence point to signal the end of the titration.
+        </p>
 
-  <h2 className="text-xl font-bold mt-4">Mathematical Model</h2>
-  <p>The mathematical expression of Pythagoras' Theorem is:</p>
-  <p className="text-center font-mono bg-gray-100 p-2 rounded-md">
-    a² + b² = c²
-  </p>
-  <p>
-    - **a:** One leg of the triangle <br />
-    - **b:** The other leg of the triangle <br />
-    - **c:** The hypotenuse (longest side)
-  </p>
+        <h2 className="text-xl font-bold mt-4">Mathematical Model</h2>
+        <p>The titration formula is:</p>
+        <p className="text-center font-mono bg-gray-100 p-2 rounded-md">
+          N₁V₁ = N₂V₂
+        </p>
+        <p>
+          - **N₁:** Normality of the acid (eq/L) <br />
+          - **V₁:** Volume of the acid (L) <br />
+          - **N₂:** Normality of the base (eq/L) <br />- **V₂:** Volume of the
+          base (L)
+        </p>
 
-  <h2 className="text-xl font-bold mt-4">Applications</h2>
-  <p>
-    - Calculating distances in navigation and construction <br />
-    - Designing ramps, stairs, and roofs <br />
-    - Used in GPS and mapping systems <br />
-    - Solving problems in physics, engineering, and architecture
-  </p>
-</>
-
+        <h2 className="text-xl font-bold mt-4">Applications</h2>
+        <p>
+          - Determining the concentration of acids and bases <br />
+          - Testing the purity of pharmaceuticals <br />
+          - Analyzing water quality and pH levels <br />- Studying buffer
+          solutions in chemistry and biology
+        </p>
+      </>
     ),
     procedure: [
       "Set up the titration apparatus*: Assemble a burette, pipette, conical flask, burette stand, and a white tile. Ensure all glassware is clean and free from contaminants.",
@@ -77,7 +91,7 @@ function AcidBaseTitrationSimulator() {
       "Analyze sources of error*: Consider parallax errors in burette readings, incorrect endpoint detection, improper swirling, or variations in room temperature.",
       "Document findings*: Compile a detailed lab report including observations, data tables, calculations, graphs, and conclusions on the precision and accuracy of the titration.",
     ],
-    animation: "/assets/acid-base-titration-animation.gif",
+    queries: "/assets/acid-base-titration-animation.gif",
     video: "https://www.youtube.com/embed/AcidBaseTitrationVideo",
     resources: [
       {
@@ -196,7 +210,7 @@ function AcidBaseTitrationSimulator() {
         {[
           "theory",
           "procedure",
-          "animation",
+          "queries",
           "simulation",
           "video",
           "resources",
@@ -355,12 +369,10 @@ function AcidBaseTitrationSimulator() {
             </div>
           </div>
         )}
-        {activeTab === "animation" && (
-          <img
-            src={experiment.animation}
-            alt="Animation"
-            className="rounded-md w-full"
-          />
+        {activeTab === "queries" && (
+          <div>
+            <ChatInterface experiment="acid base titration"/>
+            </div>
         )}
         {activeTab === "simulation" && <HelpAcidBaseTitration />}
         {activeTab === "video" && (

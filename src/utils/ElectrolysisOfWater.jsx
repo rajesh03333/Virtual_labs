@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
 import HelpElectrolysisOfWater from "./help_ElectrolysisOfWater";
+import ChatInterface from "./ChatAi";
 
 function ElectrolysisExperiment() {
   const navigate = useNavigate();
@@ -92,7 +93,7 @@ function ElectrolysisExperiment() {
 
       "Document your findings*: Prepare a comprehensive lab report including your methodology, data tables, calculations, graphs, and conclusions.",
     ],
-    animation: "/assets/electrolysis-animation.gif",
+    queries: "/assets/electrolysis-animation.gif",
     video: "https://www.youtube.com/embed/6pM5to36Rws",
     resources: [
       {
@@ -199,7 +200,7 @@ function ElectrolysisExperiment() {
         {[
           "theory",
           "procedure",
-          "animation",
+          "queries",
           "simulation",
           "video",
           "resources",
@@ -371,6 +372,11 @@ function ElectrolysisExperiment() {
               </div>
             </div>
           </div>
+        )}
+        {activeTab === "queries" && (
+          <div>
+            <ChatInterface experiment="electrolysis"/>
+            </div>
         )}
 
         {activeTab === "simulation" && <HelpElectrolysisOfWater />}

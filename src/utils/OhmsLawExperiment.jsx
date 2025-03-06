@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
 import HelpOhmsLaw from "./help_OhmsLawExperiment";
+import ChatInterface from "./ChatAi";
 
 function OhmsLawSimulator() {
   const navigate = useNavigate();
@@ -77,7 +78,7 @@ function OhmsLawSimulator() {
       "Analyze sources of error*: Consider contact resistance, instrument precision, temperature variations, and other factors that might affect your measurements.",
       "Document your findings*: Prepare a lab report including your methodology, data tables, calculations, graphs, and conclusions about the validity of Ohm's Law for different components.",
     ],
-    animation: "/assets/ohms-law-animation.gif",
+    queries: "/assets/ohms-law-animation.gif",
     video: "https://www.youtube.com/embed/OhmsLawVideo",
     resources: [
       {
@@ -186,7 +187,7 @@ function OhmsLawSimulator() {
         {[
           "theory",
           "procedure",
-          "animation",
+          "queries",
           "simulation",
           "video",
           "resources",
@@ -367,12 +368,10 @@ function OhmsLawSimulator() {
             </div>
           </div>
         )}
-        {activeTab === "animation" && (
-          <img
-            src={experiment.animation}
-            alt="Ohm's Law Animation"
-            className="rounded-md w-full"
-          />
+        {activeTab === "queries" && (
+          <div>
+            <ChatInterface experiment="ohms law"/>
+            </div>
         )}
         {activeTab === "simulation" && <HelpOhmsLaw />}
         {activeTab === "video" && (

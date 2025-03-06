@@ -3,6 +3,8 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
 import HelpPHScale from "./help_PHSensor";
+import ChatInterface from "./ChatAi";
+
 
 function PhScaleSimulator() {
   const navigate = useNavigate();
@@ -122,8 +124,6 @@ function PhScaleSimulator() {
     });
     setScore(correctAnswers);
   };
-
-  const divHandler = () => {};
 
   const sendFeedback = (e) => {
     e.preventDefault();
@@ -316,19 +316,22 @@ function PhScaleSimulator() {
           </div>
         )}
         {activeTab === "queries" && (
-          <div className="flex gap-2">
-            <input
-              type="search"
-              className="w-[300px] h-[30px] rounded border border-gray-400 px-2"
-              placeholder="Enter Query"
-            />
-            <button
-              className="bg-blue-500 text-white rounded-lg px-4 py-1 hover:bg-blue-600"
-              onClick={divHandler}
-            >
-              Submit
-            </button>
-          </div>
+          // <div className="flex gap-2">
+          //   <input
+          //     type="search"
+          //     className="w-[300px] h-[30px] rounded border border-gray-400 px-2"
+          //     placeholder="Enter Query"
+          //   />
+          //   <button
+          //     className="bg-blue-500 text-white rounded-lg px-4 py-1 hover:bg-blue-600"
+          //     onClick={divHandler}
+          //   >
+          //     Submit
+          //   </button>
+          // </div>
+          <div>
+            <ChatInterface experiment="ph scale simulator"/>
+            </div>
         )}
 
         {activeTab === "simulation" && <HelpPHScale />}
