@@ -17,12 +17,22 @@ function PhScaleSimulator() {
     theory:
       "The pH scale measures how acidic or basic a substance is, ranging from 0 to 14...",
     procedure: [
-      "Select a solution to test its pH value.",
-      "Use the pH meter or indicator paper to measure the pH.",
-      "Observe the color change and match it to the pH scale.",
-      "Interpret the pH value to determine if the solution is acidic, neutral, or basic.",
+      "Access the pH simulator*: Open the virtual pH simulation software or website and ensure it is functioning correctly.",
+      "Familiarize with the interface*: Explore the simulator’s tools, such as the pH scale, solution selection, dropper, beakers, and virtual probes.",
+      "Select the solution*: Choose an acidic, neutral, or basic solution from the simulator's options to analyze its pH.",
+      "Calibrate the virtual pH meter*: If required, adjust the pH meter in the simulator using standard buffer solutions to ensure accurate readings.",
+      "Immerse the virtual pH probe*: Drag and place the pH probe into the selected solution to measure its pH value.",
+      "Observe the pH reading*: Note the pH value displayed on the simulator. Identify whether the solution is acidic (pH < 7), neutral (pH = 7), or basic (pH > 7).",
+      "Test different solutions*: Repeat the process with different solutions, including strong acids, weak acids, strong bases, and weak bases, to compare pH values.",
+      "Add acids or bases*: Use the simulator’s tools to add a few drops of a strong acid (e.g., HCl) or a strong base (e.g., NaOH) to the solution and observe how the pH changes.",
+      "Analyze buffer solutions*: If available, test buffer solutions in the simulator by adding acids and bases to see how they resist changes in pH.",
+      "Plot a pH change graph*: Record the pH values before and after adding acids or bases, and create a pH vs. volume graph if the simulator allows data visualization.",
+      "Compare with real-life experiments*: Relate the simulated pH values to expected real-world results based on known pH scales of common substances.",
+      "Identify the equivalence point*: If the simulator includes titration, perform an acid-base titration and note the pH at the equivalence point.",
+      "Analyze sources of error*: Consider limitations of the simulation, such as preset values, digital approximations, and the absence of real-world factors like temperature effects.",
+      "Document findings*: Compile observations, pH values, comparisons, and conclusions on acid-base properties based on the simulator’s output.",
     ],
-    animation: "/assets/ph-scale-animation.gif",
+    queries: "/assets/ph-scale-animation.gif",
     video: "https://www.youtube.com/embed/pHScaleVideo",
     resources: [
       { title: "pH Scale - Khan Academy", link: "https://www.khanacademy.org" },
@@ -70,6 +80,8 @@ function PhScaleSimulator() {
     setScore(correctAnswers);
   };
 
+  const divHandler = () => {};
+
   const sendFeedback = (e) => {
     e.preventDefault();
     if (!feedback.trim()) {
@@ -113,7 +125,7 @@ function PhScaleSimulator() {
         {[
           "theory",
           "procedure",
-          "animation",
+          "queries",
           "simulation",
           "video",
           "resources",
@@ -136,21 +148,146 @@ function PhScaleSimulator() {
           <p className="text-gray-700">{experiment.theory}</p>
         )}
         {activeTab === "procedure" && (
-          <ul className="list-disc pl-5">
-            {experiment.procedure.map((step, i) => (
-              <li key={i} className="mb-2 text-gray-700">
-                {step}
-              </li>
-            ))}
-          </ul>
+          <div className="procedure-section">
+            <h2 className="text-2xl font-semibold text-blue-600 mb-4">
+              pH Simulation Procedure
+            </h2>
+
+            <div className="mb-6 p-4 bg-blue-100 rounded-lg">
+              <h3 className="text-lg font-medium text-blue-800 mb-2">
+                Objectives
+              </h3>
+              <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                <li>Measure the pH of various solutions</li>
+                <li>Understand the pH scale and its significance</li>
+                <li>Analyze how acids and bases affect pH levels</li>
+              </ul>
+            </div>
+
+            <div className="mb-6 p-4 bg-blue-100 rounded-lg">
+              <h3 className="text-lg font-medium text-blue-800 mb-2">
+                Required Materials
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mt-2">
+                <div className="bg-white p-3 rounded-md shadow-sm text-gray-700">
+                  pH Meter
+                </div>
+                <div className="bg-white p-3 rounded-md shadow-sm text-gray-700">
+                  Litmus Paper
+                </div>
+                <div className="bg-white p-3 rounded-md shadow-sm text-gray-700">
+                  Beakers
+                </div>
+                <div className="bg-white p-3 rounded-md shadow-sm text-gray-700">
+                  Distilled Water
+                </div>
+                <div className="bg-white p-3 rounded-md shadow-sm text-gray-700">
+                  Acidic and Basic Solutions
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-6 p-4 bg-blue-100 rounded-lg">
+              <h3 className="text-lg font-medium text-blue-800 mb-2">
+                Safety Precautions
+              </h3>
+              <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                <li>Wear protective gloves and goggles</li>
+                <li>Avoid direct contact with acidic or basic solutions</li>
+                <li>Rinse equipment thoroughly after use</li>
+              </ul>
+            </div>
+
+            <div className="bg-blue-50 p-5 rounded-lg">
+              <h3 className="text-lg font-medium text-blue-800 mb-4">
+                Step-by-Step Procedure
+              </h3>
+              <ol className="list-none pl-0">
+                {experiment.procedure.map((step, index) => (
+                  <li key={index} className="mb-4 flex items-start">
+                    <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 mt-1">
+                      {index + 1}
+                    </div>
+                    <div className="bg-white p-3 rounded-md shadow-sm flex-grow">
+                      <p
+                        className="text-gray-700"
+                        dangerouslySetInnerHTML={{
+                          __html: step.replace(
+                            /\\(.?)\\*/g,
+                            "<strong>$1</strong>"
+                          ),
+                        }}
+                      ></p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div className="mt-6 p-4 bg-blue-100 rounded-lg">
+              <h3 className="text-lg font-medium text-blue-800 mb-2">
+                Expected Results
+              </h3>
+              <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                <li>
+                  pH values will range from 0 to 14, indicating acidity or
+                  basicity
+                </li>
+                <li>
+                  Neutral solutions (e.g., distilled water) will have a pH
+                  around 7
+                </li>
+                <li>Acids will have pH values below 7, and bases above 7</li>
+              </ul>
+            </div>
+
+            <div className="mt-6 p-4 bg-blue-100 rounded-lg">
+              <h3 className="text-lg font-medium text-blue-800 mb-2">
+                Data Collection Table
+              </h3>
+              <div className="overflow-x-auto">
+                <table className="w-full bg-white border border-blue-200 rounded-md">
+                  <thead>
+                    <tr className="bg-blue-50">
+                      <th className="border border-blue-200 p-2">Solution</th>
+                      <th className="border border-blue-200 p-2">pH Reading</th>
+                      <th className="border border-blue-200 p-2">
+                        Observation
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {["Water", "Vinegar", "Soap"].map((solution, index) => (
+                      <tr key={index}>
+                        <td className="border border-blue-200 p-2">
+                          {solution}
+                        </td>
+                        <td className="border border-blue-200 p-2"></td>
+                        <td className="border border-blue-200 p-2"></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         )}
-        {activeTab === "animation" && (
-          <img
-            src={experiment.animation}
-            alt="pH Scale Animation"
-            className="rounded-md w-full"
-          />
+        {activeTab === "queries" && (
+          <div className="flex gap-2">
+            <input
+              type="search"
+              className="w-[300px] h-[30px] rounded border border-gray-400 px-2"
+              placeholder="Enter Query"
+            />
+            <button
+              className="bg-blue-500 text-white rounded-lg px-4 py-1 hover:bg-blue-600"
+              onClick={divHandler}
+            >
+              Submit
+            </button>
+          </div>
         )}
+
         {activeTab === "simulation" && <HelpPHScale />}
         {activeTab === "video" && (
           <iframe

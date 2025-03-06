@@ -122,7 +122,7 @@ const SimplePendulum = () => {
 
         <div>
           <label className="block text-lg font-semibold text-gray-700">
-            Length (px):
+            Length (cm):
           </label>
           <input
             type="range"

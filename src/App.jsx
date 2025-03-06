@@ -403,9 +403,7 @@ function HomePage() {
               </ul>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm">
-            <p>&copy; 2025 VisionLab Interactive Simulations, University of Colorado Boulder</p>
-          </div>
+          
         </div>
       </footer>
     </div>
