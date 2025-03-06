@@ -102,7 +102,7 @@ function Biology() {
                     </ol>
                   </div>
                   
-                  <button className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                  <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
                     Start Experiment
                   </button>
                 </div>

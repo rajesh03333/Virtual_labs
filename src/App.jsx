@@ -16,6 +16,7 @@ import AcidBaseTitrationSimulator from './utils/AcidBaseTitrationSimulator';
 import OhmsLawExperiment from './utils/OhmsLawExperiment';
 import HookesLawExperiment from './utils/HookesLawExperiment';
 import SimplePendulumExperiment from './utils/SimplePendulumExperiment';
+import FeaturedSimulations from './components/FeaturedSimulations';
 
 
 function SimulationCard({ title, image, subject, grade }) {
@@ -233,7 +234,7 @@ function HomePage() {
           </h1>
 
           <button>
-            <a href="#target-section" className="mt-4 inline-block px-6 py-3 border-2 border-gray-200 text-gray-200 rounded-full text-lg font-bold hover:bg-gray-200 hover:text-black transition">
+          <a href="#target-section" className="mt-4 inline-block px-6 py-3  bg-gray-100 text-black rounded-full text-lg font-bold hover:bg-gray-150 hover:text-black transition">
               EXPLORE OUR SIMS
             </a>
           </button>
@@ -292,7 +293,6 @@ function HomePage() {
             <button onClick={() => navigate("/chemistry")}>
               <div>
                 <h3 className="font-bold">Chemistry</h3>
-                <p className="text-sm text-gray-600">120+ simulations</p>
               </div>
             </button>
           </div>
@@ -301,7 +301,6 @@ function HomePage() {
             <button onClick={() => navigate("/physics")}>
               <div>
                 <h3 className="font-bold">Physics</h3>
-                <p className="text-sm text-gray-600">150+ simulations</p>
               </div>
             </button>
           </div>
@@ -310,7 +309,6 @@ function HomePage() {
             <button onClick={() => navigate("/biology")}>
               <div>
                 <h3 className="font-bold">Biology</h3>
-                <p className="text-sm text-gray-600">80+ simulations</p>
               </div>
             </button>
           </div>
@@ -319,7 +317,6 @@ function HomePage() {
             <button onClick={() => navigate("/math")}>
               <div>
                 <h3 className="font-bold">Math</h3>
-                <p className="text-sm text-gray-600">100+ simulations</p>
               </div>
             </button>
           </div>
@@ -327,7 +324,7 @@ function HomePage() {
       </div>
 
       {/* Featured Simulations */}
-      <div id="target-section" className="container mx-auto px-4 py-16">
+      {/* <div id="target-section" className="container mx-auto px-4 py-16">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold">Featured Simulations</h2>
           <button className="flex items-center gap-2 text-blue-600 hover:text-blue-800 mt-4 md:mt-0">
@@ -340,6 +337,9 @@ function HomePage() {
             <SimulationCard key={index} {...sim} />
           ))}
         </div>
+      </div> */}
+      <div id="target-section" >
+        <FeaturedSimulations/>
       </div>
       <div className="container mx-auto px-4 py-16" id="about">
         {/* Publications - Full Width */}
