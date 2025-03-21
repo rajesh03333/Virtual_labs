@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import { Search, Beaker, Brain, Atom, Calculator, ChevronRight, Download, ChevronDown } from 'lucide-react';
 import Physics from './components/Physics';
 import Chemistry from './components/Chemistry';
-import Biology from './components/Biology';
 import Math from './components/Math';
 import EarthScience from './components/EarthScience';
 import PythagorasTheorem from './utils/Pythagoras';
@@ -17,6 +16,8 @@ import OhmsLawExperiment from './utils/OhmsLawExperiment';
 import HookesLawExperiment from './utils/HookesLawExperiment';
 import SimplePendulumExperiment from './utils/SimplePendulumExperiment';
 import FeaturedSimulations from './components/FeaturedSimulations';
+import ComputerScience from './components/ComputerScience';
+import LinearSearchExperiment from './utils/LinearSearchExperiment';
 
 
 function SimulationCard({ title, image, subject, grade }) {
@@ -48,7 +49,7 @@ function DropdownMenu({ title, items, isOpen, onToggle }) {
     if (item === "Physics") navigate('/physics');
     if (item === "Chemistry") navigate('/chemistry');
     if (item === "Math") navigate('/math');
-    if (item === "Biology") navigate('/biology');
+    if (item === "ComputerScience") navigate('/computerscience');
     if (item === "Earth Science") navigate('/earthscience');
 
   };
@@ -94,7 +95,7 @@ function HomePage() {
         "Physics",
         "Chemistry",
         "Math",
-        "Biology",
+        "ComputerScience",
         "Earth Science",
       ]
     },
@@ -306,9 +307,9 @@ function HomePage() {
           </div>
           <div className="flex items-center gap-4 p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
             <Brain className="w-8 h-8 text-green-500" />
-            <button onClick={() => navigate("/biology")}>
+            <button onClick={() => navigate("/computerscience")}>
               <div>
-                <h3 className="font-bold">Biology</h3>
+                <h3 className="font-bold">Computer Science</h3>
               </div>
             </button>
           </div>
@@ -418,7 +419,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/physics" element={<Physics />} />
           <Route path="/chemistry" element={<Chemistry />} />
-          <Route path="/biology" element={<Biology />} />
+          <Route path="/computerscience" element={<ComputerScience />} />
           <Route path="/math" element={<Math />} />
           <Route path="/earthscience" element={<EarthScience />} />
 
@@ -432,6 +433,8 @@ function App() {
            <Route path="/physics/ohm's-law" element={<OhmsLawExperiment/>} />
            <Route path="/physics/verification-of-hooke's-law" element={<HookesLawExperiment/>} />
            <Route path="/physics/simple-pendulum" element={<SimplePendulumExperiment />} ></Route>
+
+           <Route path="/computerscience/linearsearch" element={<LinearSearchExperiment />} />
 
 
         </Routes>

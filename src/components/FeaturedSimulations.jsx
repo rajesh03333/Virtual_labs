@@ -44,6 +44,12 @@ const experiments = [
         path: "/math/pythagorean-theorem", 
         image: "https://imgs.search.brave.com/EbvWn2NMdCD4lmnno-EEMh1tFhLzqLvJS0rsNKITcV8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA1LzExLzA3LzMz/LzM2MF9GXzUxMTA3/MzM5MV9TSVZPMHJS/QlFqTlZZeG5rNUht/OVhtc21Pc0s3bjFx/aC5qcGc", 
         subject: "Mathematics"
+    },
+    {
+        title: "linearsearch",
+        path: "/computerscience/linearsearch",
+        image:"https://i.pinimg.com/originals/f5/27/0a/f5270acbc4b98112fcd520d2eea023de.gif",
+        subject: "Computer Science",
     }
 ];
 
