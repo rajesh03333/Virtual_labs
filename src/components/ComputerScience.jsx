@@ -15,7 +15,7 @@ function ComputerScience() {
         "https://i.pinimg.com/originals/f5/27/0a/f5270acbc4b98112fcd520d2eea023de.gif",
     },
     {
-      title: "Sorting Algorithm Simulator",
+      title: "bubblesort",
       category: "Data Structures & Algorithms",
       theory:
         "Understand sorting techniques such as Bubble Sort, Selection Sort, and Quick Sort.",
@@ -23,7 +23,7 @@ function ComputerScience() {
         "https://upload.wikimedia.org/wikipedia/commons/c/c8/Bubble-sort-example-300px.gif",
     },
     {
-      title: "Binary Search Demonstration",
+      title: "binarysearch",
       category: "Algorithms",
       theory:
         "See how binary search efficiently finds elements in a sorted array.",

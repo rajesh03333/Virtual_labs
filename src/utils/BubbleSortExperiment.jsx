@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
-import HelpLinearSearch from "./help_LinearSearch";
+import HelpBubbleSort from "./HelpBubbleSort";
 import ChatInterface from "./ChatAi";
 
-function LinearSearchExperiment() {
+function BubbleSortExperiment() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("theory");
   const [feedback, setFeedback] = useState("");
@@ -14,64 +14,64 @@ function LinearSearchExperiment() {
   const [score, setScore] = useState(null);
 
   const experiment = {
-    title: "Linear Search Simulator",
+    title: "Bubble Sort Simulator",
     theory: (
       <>
         <h2 className="text-xl font-bold mt-4">Aim</h2>
-        <p>To understand and implement the Linear Search algorithm.</p>
+        <p>To understand and implement the Bubble Sort algorithm.</p>
 
         <h2 className="text-xl font-bold mt-4">Theory</h2>
         <p>
-          Linear Search is a simple searching algorithm that checks every
-          element in a list sequentially until the desired element is found or
-          the list ends.
+          Bubble Sort is a simple sorting algorithm that repeatedly steps
+          through the list, compares adjacent elements, and swaps them if they
+          are in the wrong order.
         </p>
         <p>
-          Time Complexity: **O(n)**, where *n* is the number of elements in the
+          Time Complexity: <strong>O(n²)</strong>, where <em>n</em> is the number of elements in the
           list.
         </p>
       </>
     ),
     procedure: [
-      "Start with an array and a target element.",
-      "Compare the target with each element in the array.",
-      "If a match is found, return the index.",
-      "If no match is found, return -1.",
+      "Start with an unsorted array of elements.",
+      "Compare each pair of adjacent elements.",
+      "Swap them if they are in the wrong order.",
+      "Repeat the process for all elements until the array is sorted.",
     ],
-    queries: "/assets/linear-search-animation.gif",
-    video: "https://www.youtube.com/embed/linearSearchVideo",
+    queries: "/assets/bubble-sort-animation.gif",
+    video: "https://www.youtube.com/embed/bubbleSortVideo",
     resources: [
-      { title: "Linear Search - GeeksforGeeks", link: "https://www.geeksforgeeks.org/linear-search/" },
-      { title: "Linear Search - Wikipedia", link: "https://en.wikipedia.org/wiki/Linear_search" },
+      { title: "Bubble Sort - GeeksforGeeks", link: "https://www.geeksforgeeks.org/bubble-sort/" },
+      { title: "Bubble Sort - Wikipedia", link: "https://en.wikipedia.org/wiki/Bubble_sort" },
     ],
     feedback: "Please share your feedback on this simulation!",
   };
 
   const quizQuestions = [
     {
-      question: "What is the worst-case time complexity of Linear Search?",
-      options: ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
-      correct: "O(n)",
+      question: "What is the worst-case time complexity of Bubble Sort?",
+      options: ["O(n)", "O(log n)", "O(n²)", "O(n log n)"],
+      correct: "O(n²)",
     },
     {
-      question: "When is Linear Search preferred over Binary Search?",
-      options: ["When the list is large", "When the list is sorted", "When the list is small and unsorted", "Never"],
-      correct: "When the list is small and unsorted",
+      question: "Bubble Sort is best suited for which of the following cases?",
+      options: ["Small datasets", "Large datasets", "Reverse-sorted data", "Randomly ordered data"],
+      correct: "Small datasets",
     },
     {
-      question: "What happens if the target element is not found?",
-      options: ["The algorithm returns -1", "The algorithm throws an error", "The algorithm crashes", "It returns the last element"],
-      correct: "The algorithm returns -1",
+      question: "How many passes does Bubble Sort take in the best case?",
+      options: ["n", "n-1", "1", "log n"],
+      correct: "1",
     },
     {
-      question: "Linear Search is an example of which algorithm paradigm?",
-      options: ["Divide and Conquer", "Greedy Algorithm", "Brute Force", "Dynamic Programming"],
-      correct: "Brute Force",
+      question: "What happens if the array is already sorted?",
+      options: ["No swaps occur", "Extra passes are required", "Algorithm breaks", "Time complexity increases"],
+      correct: "No swaps occur",
     },
     {
-      question: "What is the best-case time complexity of Linear Search?",
-      options: ["O(n)", "O(log n)", "O(1)", "O(n log n)"],
-      correct: "O(1)",
+      question: "What is the main drawback of Bubble Sort?",
+      options: ["High space complexity", "Slow performance on large lists", "Requires additional data structures", "Does not guarantee sorting"],
+      correct: "Slow performance on large lists",
     },
   ];
 
@@ -120,14 +120,14 @@ function LinearSearchExperiment() {
             ))}
           </ol>
         )}
-        {activeTab === "queries" && <ChatInterface experiment="linear search" />}
-        {activeTab === "simulation" && <HelpLinearSearch />}
+        {activeTab === "queries" && <ChatInterface experiment="bubble sort" />}
+        {activeTab === "simulation" && <HelpBubbleSort />}
         {activeTab === "video" && (
           <iframe
             width="100%"
             height="400"
             src={experiment.video}
-            title="Linear Search Video"
+            title="Bubble Sort Video"
             className="rounded-md"
             allowFullScreen
           ></iframe>
@@ -169,4 +169,4 @@ function LinearSearchExperiment() {
   );
 }
 
-export default LinearSearchExperiment;
+export default BubbleSortExperiment;

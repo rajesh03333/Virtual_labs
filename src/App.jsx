@@ -18,6 +18,8 @@ import SimplePendulumExperiment from './utils/SimplePendulumExperiment';
 import FeaturedSimulations from './components/FeaturedSimulations';
 import ComputerScience from './components/ComputerScience';
 import LinearSearchExperiment from './utils/LinearSearchExperiment';
+import BinarySearchExperiment from './utils/BinarySearchExperiment';
+import BubbleSortExperiment from './utils/BubbleSortExperiment';
 
 
 function SimulationCard({ title, image, subject, grade }) {
@@ -435,6 +437,9 @@ function App() {
            <Route path="/physics/simple-pendulum" element={<SimplePendulumExperiment />} ></Route>
 
            <Route path="/computerscience/linearsearch" element={<LinearSearchExperiment />} />
+           <Route path="/computerscience/binarysearch" element={<BinarySearchExperiment />} />
+           <Route path="/computerscience/bubblesort" element={<BubbleSortExperiment />} />
+      
 
 
         </Routes>

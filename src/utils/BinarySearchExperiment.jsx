@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import emailjs from "emailjs-com";
-import HelpLinearSearch from "./help_LinearSearch";
+import HelpBinarySearch from "./HelpBinarySearch";
 import ChatInterface from "./ChatAi";
 
-function LinearSearchExperiment() {
+function BinarySearchExperiment() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("theory");
   const [feedback, setFeedback] = useState("");
@@ -14,49 +14,47 @@ function LinearSearchExperiment() {
   const [score, setScore] = useState(null);
 
   const experiment = {
-    title: "Linear Search Simulator",
+    title: "Binary Search Simulator",
     theory: (
       <>
         <h2 className="text-xl font-bold mt-4">Aim</h2>
-        <p>To understand and implement the Linear Search algorithm.</p>
+        <p>To understand and implement the Binary Search algorithm.</p>
 
         <h2 className="text-xl font-bold mt-4">Theory</h2>
         <p>
-          Linear Search is a simple searching algorithm that checks every
-          element in a list sequentially until the desired element is found or
-          the list ends.
+          Binary Search is an efficient searching algorithm that finds an item in a sorted list by repeatedly dividing the search interval in half.
         </p>
         <p>
-          Time Complexity: **O(n)**, where *n* is the number of elements in the
-          list.
+          Time Complexity: **O(log n)**, where *n* is the number of elements in the list.
         </p>
       </>
     ),
     procedure: [
-      "Start with an array and a target element.",
-      "Compare the target with each element in the array.",
-      "If a match is found, return the index.",
-      "If no match is found, return -1.",
+      "Start with a sorted array and a target element.",
+      "Find the middle element of the array.",
+      "If the middle element matches the target, return its index.",
+      "If the target is smaller, repeat on the left half; if larger, repeat on the right half.",
+      "Continue until the target is found or the search space is empty.",
     ],
-    queries: "/assets/linear-search-animation.gif",
-    video: "https://www.youtube.com/embed/linearSearchVideo",
+    queries: "/assets/binary-search-animation.gif",
+    video: "https://www.youtube.com/embed/binarySearchVideo",
     resources: [
-      { title: "Linear Search - GeeksforGeeks", link: "https://www.geeksforgeeks.org/linear-search/" },
-      { title: "Linear Search - Wikipedia", link: "https://en.wikipedia.org/wiki/Linear_search" },
+      { title: "Binary Search - GeeksforGeeks", link: "https://www.geeksforgeeks.org/binary-search/" },
+      { title: "Binary Search - Wikipedia", link: "https://en.wikipedia.org/wiki/Binary_search_algorithm" },
     ],
     feedback: "Please share your feedback on this simulation!",
   };
 
   const quizQuestions = [
     {
-      question: "What is the worst-case time complexity of Linear Search?",
-      options: ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
-      correct: "O(n)",
+      question: "What is the worst-case time complexity of Binary Search?",
+      options: ["O(1)", "O(n)", "O(log n)", "O(n log n)"],
+      correct: "O(log n)",
     },
     {
-      question: "When is Linear Search preferred over Binary Search?",
-      options: ["When the list is large", "When the list is sorted", "When the list is small and unsorted", "Never"],
-      correct: "When the list is small and unsorted",
+      question: "What is a prerequisite for Binary Search to work?",
+      options: ["Array must be sorted", "Array must be unsorted", "Array must contain unique elements", "Array size must be even"],
+      correct: "Array must be sorted",
     },
     {
       question: "What happens if the target element is not found?",
@@ -64,12 +62,12 @@ function LinearSearchExperiment() {
       correct: "The algorithm returns -1",
     },
     {
-      question: "Linear Search is an example of which algorithm paradigm?",
+      question: "Binary Search follows which algorithm paradigm?",
       options: ["Divide and Conquer", "Greedy Algorithm", "Brute Force", "Dynamic Programming"],
-      correct: "Brute Force",
+      correct: "Divide and Conquer",
     },
     {
-      question: "What is the best-case time complexity of Linear Search?",
+      question: "What is the best-case time complexity of Binary Search?",
       options: ["O(n)", "O(log n)", "O(1)", "O(n log n)"],
       correct: "O(1)",
     },
@@ -120,14 +118,14 @@ function LinearSearchExperiment() {
             ))}
           </ol>
         )}
-        {activeTab === "queries" && <ChatInterface experiment="linear search" />}
-        {activeTab === "simulation" && <HelpLinearSearch />}
+        {activeTab === "queries" && <ChatInterface experiment="binary search" />}
+        {activeTab === "simulation" && <HelpBinarySearch />}
         {activeTab === "video" && (
           <iframe
             width="100%"
             height="400"
             src={experiment.video}
-            title="Linear Search Video"
+            title="Binary Search Video"
             className="rounded-md"
             allowFullScreen
           ></iframe>
@@ -136,7 +134,12 @@ function LinearSearchExperiment() {
           <ul className="list-disc pl-5">
             {experiment.resources.map((res, i) => (
               <li key={i}>
-                <a href={res.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                <a
+                  href={res.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
                   {res.title}
                 </a>
               </li>
@@ -169,4 +172,4 @@ function LinearSearchExperiment() {
   );
 }
 
-export default LinearSearchExperiment;
+export default BinarySearchExperiment;
